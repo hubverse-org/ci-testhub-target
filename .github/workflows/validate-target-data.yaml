@@ -2,18 +2,34 @@ name: Hub Target Data Validation (R)
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - '**'
+    paths:
+      # include these
+      - 'target-data/time-series.*'
+      - 'target-data/time-series/**'
+      - 'target-data/oracle-output.*'
+      - 'target-data/oracle-output/**'
+      # exclude README in any form
+      - '!**/README'
+      - '!**/README.*'
+      - '!**/readme'
+      - '!**/readme.*'
+
   pull_request:
-    branches: [main, main-target-dir-v5]
+    branches:
+      - main
+      - main-target-dir-v5
     paths:
       - 'target-data/time-series.*'
       - 'target-data/time-series/**'
       - 'target-data/oracle-output.*'
       - 'target-data/oracle-output/**'
-    paths-ignore:
-      - '**/README'
-      - '**/README.*'
-      - '**/readme'
-      - '**/readme.*'
+      - '!**/README'
+      - '!**/README.*'
+      - '!**/readme'
+      - '!**/readme.*'
 
 permissions:
   contents: read
@@ -42,6 +58,7 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           packages: |
+            any::remotes
             any::sessioninfo
 
       # Install dev version of hubValidations from GitHub branch
