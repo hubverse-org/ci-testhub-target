@@ -1,0 +1,2 @@
+reference_date,target,horizon,location,target_end_date,output_type,output_type_id,value
+2022-10-22,wk flu hosp rate category,1,US,2022-10-29,pmf,low,0.25
